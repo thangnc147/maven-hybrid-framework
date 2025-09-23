@@ -6,14 +6,6 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.nopCommerce.PageGenerator;
-import pageObjects.nopCommerce.externalUser.sidebar.UserAddressPO;
-import pageObjects.nopCommerce.externalUser.sidebar.UserCustomerInfoPO;
-import pageObjects.nopCommerce.externalUser.sidebar.UserOrderPageObject;
-import pageObjects.nopCommerce.externalUser.sidebar.UserRewardPointPO;
-import pageUIs.jquery.HomePageUI;
-import pageUIs.nopCommerce.BasePageUI;
-import pageUIs.nopCommerce.externalUser.UserSidebarPageUI;
 import pageUIs.orangehrm.BasePUI;
 
 import java.time.Duration;
@@ -516,31 +508,6 @@ public class BasePage {
         new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).until(ExpectedConditions.alertIsPresent());
     }
 
-    /* Only use for Level_07 */
-    public UserRewardPointPO openRewardPointPage(WebDriver driver) {
-        waitForElementClickable(driver, UserSidebarPageUI.REWARD_POINT_LINK);
-        clickToElement(driver, UserSidebarPageUI.REWARD_POINT_LINK);
-        return PageGenerator.getUserRewardPointPage(driver);
-    }
-
-    public UserAddressPO openAddressPage(WebDriver driver) {
-        waitForElementClickable(driver, UserSidebarPageUI.ADDRESS_LINK);
-        clickToElement(driver, UserSidebarPageUI.ADDRESS_LINK);
-        return PageGenerator.getUserAddressPage(driver);
-    }
-
-    public UserOrderPageObject openOrderPage(WebDriver driver) {
-        waitForElementClickable(driver, UserSidebarPageUI.ORDER_LINK);
-        clickToElement(driver, UserSidebarPageUI.ORDER_LINK);
-        return PageGenerator.getUserOrderPage(driver);
-    }
-
-    public UserCustomerInfoPO openCustomerInfoPage(WebDriver driver) {
-        waitForElementClickable(driver, UserSidebarPageUI.CUSTOMER_INFO_LINK);
-        clickToElement(driver, UserSidebarPageUI.CUSTOMER_INFO_LINK);
-        return PageGenerator.getUserCustomerInfoPage(driver);
-    }
-
     public void uploadMultipleFiles(WebDriver driver, String... fileNames) {
         String filePath = GlobalConstants.UPLOAD_PATH;
         String fullFileName = "";
@@ -548,46 +515,9 @@ public class BasePage {
             fullFileName = fullFileName + filePath + file + "\n";
         }
         fullFileName = fullFileName.trim();
-        getElement(driver, HomePageUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName);
+        getElement(driver, BasePUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName);
     }
 
-    public void enterToTextboxByID(WebDriver driver, String textboxId, String value) {
-        waitForElementVisible(driver, BasePageUI.TEXTBOX_BY_ID, textboxId);
-        sendkeyToElement(driver, BasePageUI.TEXTBOX_BY_ID, value, textboxId);
-    }
-
-    public void clickToButtonByText(WebDriver driver, String buttonText) {
-        waitForElementClickable(driver, BasePageUI.BUTTON_BY_TEXT, buttonText);
-        clickToElement(driver, BasePageUI.BUTTON_BY_TEXT, buttonText);
-    }
-
-    public void clickToRadioByID(WebDriver driver, String radioID) {
-        waitForElementClickable(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioID);
-        checkTheCheckboxOrRadio(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioID);
-    }
-
-    public void clickToCheckboxByID(WebDriver driver, String checkboxID) {
-        waitForElementClickable(driver, BasePageUI.CHECKBOX_BY_ID, checkboxID);
-        checkTheCheckboxOrRadio(driver, BasePageUI.CHECKBOX_BY_ID, checkboxID);
-    }
-
-    public String getTextboxValueByID(WebDriver driver, String textboxId) {
-//        waitForElementAttribute(driver, "AttributeName", "AttributeValue", BasePageUI.TEXTBOX_BY_ID, textboxId);
-        waitForElementVisible(driver, BasePageUI.TEXTBOX_BY_ID, textboxId);
-        return getAttributeValue(driver, BasePageUI.TEXTBOX_BY_ID, "value", textboxId);
-    }
-
-    public boolean isRaditoSelectedByID(WebDriver driver, String radioId) {
-        waitForElementSelected(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioId);
-        return isElementSelected(driver, BasePageUI.RADIO_BUTTON_BY_ID, radioId);
-    }
-
-    public boolean isCheckboxSelectedByID(WebDriver driver, String checkboxId) {
-        waitForElementSelected(driver, BasePageUI.RADIO_BUTTON_BY_ID, checkboxId);
-        return isElementSelected(driver, BasePageUI.RADIO_BUTTON_BY_ID, checkboxId);
-    }
-
-    /* Only using for OragneHRM Porject */
     public boolean waitAllLoadingIconInvisible(WebDriver driver) {
         return waitForListElementInvisible(driver, BasePUI.LOADING_ICON);
     }
