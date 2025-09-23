@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="NopCommerce Automcation Test">
+
+    <listeners>
+        <listener class-name="commons.MethodListener"></listener>
+    </listeners>
+
+    <parameter name="userUrl" value="http://localhost:80/"/>
+    <parameter name="adminUrl" value="http://localhost:80/"/>
+
+        <test name="Run on Chrome" preserve-order="true">
+            <parameter name="browser" value="chrome"/>
+            <classes>
+<!--                <class name="com.nopcommerce.common.Login" />-->
+                <class name="com.nopcommerce.users.Level_21_Browser_Config" />
+            </classes>
+        </test>
+
+        <test name="Run on Firefox">
+            <parameter name="browser" value="firefox"/>
+            <classes>
+<!--                <class name="com.nopcommerce.common.Login" />-->
+                <class name="com.nopcommerce.users.Level_21_Browser_Config" />
+            </classes>
+        </test>
+
+<!--            <test name="Run on Edge">-->
+<!--                <parameter name="browser" value="hedge"/>-->
+<!--                <classes>-->
+<!--                    <class name="com.nopcommerce.common.Login" />-->
+<!--                    <class name="com.nopcommerce.users.Level_21_Browser_Config" />-->
+<!--                </classes>-->
+<!--            </test>-->
+
+</suite>
