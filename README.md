@@ -1,8 +1,8 @@
 # OrangeHRM Automation Framework
-This project originated from my previous repository where I explored various design concepts. You can view the original project at https://github.com/ntlinh8/hybrid-framework-nopcommerce/.
+This project originated from my previous repository where I explored various design concepts. You can view the original project at https://github.com/thangnc147/hybrid_nopcommerce_framework
 
 ## Introduction
-Powered by Java, Selenium with TestNG, and AllureReport, this project aims to validate functionalities for [https://demo.nopcommerce.com/](https://opensource-demo.orangehrmlive.com/)
+Powered by Java, Selenium with TestNG, and AllureReport, this project aims to validate functionalities for https://opensource-demo.orangehrmlive.com/
 
 Techstacks used:
 * Java 
