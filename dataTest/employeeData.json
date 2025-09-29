@@ -1,0 +1,10 @@
+{
+  "firstName" : "Thang",
+  "middleName" : "Employee",
+  "lastName" : "Nguyen",
+  "driverLicense" : "900232",
+  "licenseExpiryDate" : "2025-10-04",
+  "nationality" : "Vietnamese",
+  "maritalStatus" : "Single",
+  "dateOfBirth" : "1999-11-02"
+}

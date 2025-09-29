@@ -142,10 +142,10 @@ public class BaseTest {
         boolean status = true;
         try {
             Assert.assertTrue(condition);
-            log.info("-------------------- PASS --------------------");
+//            log.info("-------------------- PASS --------------------");
         } catch (Throwable e) {
             status = false;
-            log.info("-------------------- FAILED --------------------");
+//            log.info("-------------------- FAILED --------------------");
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
         }
@@ -156,10 +156,10 @@ public class BaseTest {
         boolean status = true;
         try {
             Assert.assertFalse(condition);
-            log.info("-------------------- PASS --------------------");
+//            log.info("-------------------- PASS --------------------");
         } catch (Throwable e) {
             status = false;
-            log.info("-------------------- FAILED --------------------");
+//            log.info("-------------------- FAILED --------------------");
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
         }
@@ -170,10 +170,10 @@ public class BaseTest {
         boolean status = true;
         try {
             Assert.assertEquals(actual, expected);
-            log.info("-------------------- PASS --------------------");
+//            log.info("-------------------- PASS --------------------");
         } catch (Throwable e) {
             status = false;
-            log.info("-------------------- FAILED --------------------");
+//            log.info("-------------------- FAILED --------------------");
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
         }

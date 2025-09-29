@@ -22,19 +22,6 @@ import pageObjects.orangehrm.pim.employee.detailsTab.EmployeePersonalDetailsPO;
 
 @Feature("Employee Management")
 public class PIM_01_Employee extends BaseTest {
-    private WebDriver driver;
-    private LoginPO loginPage;
-    private DashboardPO dashboardPage;
-    private AddEmployeePO addEmployeePage;
-    private EmployeeListPO employeeListPage;
-    private EmployeePersonalDetailsPO personalDetailsPage;
-    private EmergencyContactsPO emergencyContactsPage;
-    private ContactDetailsPO contactDetailsPage;
-    private String usernsame, password;
-    private String firstName, middleName, lastName, employeeId;
-    private String editFirstName, editMiddleName, editLastName, driverLicense, licenseExpiryDate, nationality, maritalStatus, dateOfBirth;
-    private String avatarImageName;
-
     @Parameters({"browser", "userUrl"})
     @BeforeClass
     public void beforeClass(String browserName, String url) {
@@ -42,23 +29,25 @@ public class PIM_01_Employee extends BaseTest {
 
         loginPage = PageGenerator.getLoginPage(driver);
 
+        employeeInfo = EmployeeInfo.getEmployeeInfo();
+
         usernsame = "thangnguyen";
         password = "jBg0xOKLJJNdjnn^Ej";
 
-        firstName = "Thang";
-        middleName = "Employee" + generateRandomNumber();
-        lastName = "Nguyen";
+        firstName = employeeInfo.getFirstName();
+        middleName = employeeInfo.getMiddleName() + generateRandomNumber();
+        lastName = employeeInfo.getLastName();
 
         avatarImageName = "Image02.png";
 
         editFirstName = "NEW";
         editMiddleName = "NEW";
         editLastName = "NEW";
-        driverLicense = "900232";
-        licenseExpiryDate = "2025-10-04";
-        nationality = "Vietnamese";
-        maritalStatus = "Single";
-        dateOfBirth = "1999-11-02";
+        driverLicense = employeeInfo.getDriverLicense();
+        licenseExpiryDate = employeeInfo.getLicenseExpiryDate();
+        nationality = employeeInfo.getNationality();
+        maritalStatus = employeeInfo.getMaritalStatus();
+        dateOfBirth = employeeInfo.getDateOfBirth();
 
         loginPage.enterToUsernameTextbox(usernsame);
         loginPage.enterToPasswordTextbox(password);
@@ -81,15 +70,16 @@ public class PIM_01_Employee extends BaseTest {
 
         personalDetailsPage = addEmployeePage.clickToSaveButtonAtEmployeeCreation();
 
-        Assert.assertEquals(personalDetailsPage.getPageTitle(), "Personal Details");
+        verifyEquals(personalDetailsPage.getPageTitle(), "Personal Details");
 
         // Wait for second Loading Icon After create
         personalDetailsPage.waitAllLoadingIconInvisible(driver);
 
-        Assert.assertEquals(personalDetailsPage.getFirstNameText(), firstName);
-        Assert.assertEquals(personalDetailsPage.getMiddleNameText(), middleName);
-        Assert.assertEquals(personalDetailsPage.getLastNameText(), lastName);
-        Assert.assertEquals(personalDetailsPage.getEmployeeId(), employeeId);
+        // Verify Data after created
+        verifyEquals(personalDetailsPage.getFirstNameText(), firstName);
+        verifyEquals(personalDetailsPage.getMiddleNameText(), middleName);
+        verifyEquals(personalDetailsPage.getLastNameText(), lastName);
+        verifyEquals(personalDetailsPage.getEmployeeId(), employeeId);
     }
 
     @Description("Upload Avatar for Employee record")
@@ -112,7 +102,7 @@ public class PIM_01_Employee extends BaseTest {
         personalDetailsPage.waitAllLoadingIconInvisible(driver);
 
         // Verify new avatar show up (Avatar Size Before Upload and After Upload)
-        Assert.assertFalse(personalDetailsPage.isProfileAvatarUpdatedSuccess(beforeUpload));
+        verifyFalse(personalDetailsPage.isProfileAvatarUpdatedSuccess(beforeUpload));
     }
 
     @Test
@@ -138,17 +128,17 @@ public class PIM_01_Employee extends BaseTest {
         personalDetailsPage.waitAllLoadingIconInvisible(driver);
 
         // Verify Updated Data
-        Assert.assertEquals(personalDetailsPage.getFirstNameText(), firstName + editFirstName);
-        Assert.assertEquals(personalDetailsPage.getMiddleNameText(), middleName + editMiddleName);
-        Assert.assertEquals(personalDetailsPage.getLastNameText(), lastName + editLastName);
-        Assert.assertEquals(personalDetailsPage.getEmployeeId(), employeeId);
+        verifyEquals(personalDetailsPage.getFirstNameText(), firstName + editFirstName);
+        verifyEquals(personalDetailsPage.getMiddleNameText(), middleName + editMiddleName);
+        verifyEquals(personalDetailsPage.getLastNameText(), lastName + editLastName);
+        verifyEquals(personalDetailsPage.getEmployeeId(), employeeId);
 
-        Assert.assertEquals(personalDetailsPage.getToDriverLicenseValue(), driverLicense);
-        Assert.assertEquals( personalDetailsPage.getToLicenseExpiryDateValue(), licenseExpiryDate);
-        Assert.assertEquals(personalDetailsPage.getToNationalitySelectedItem(), nationality);
-        Assert.assertEquals(personalDetailsPage.getToMaritalStatusSelectedItem(), maritalStatus);
-        Assert.assertEquals(personalDetailsPage.getToDateOfBirthValue(), dateOfBirth);
-        Assert.assertTrue(personalDetailsPage.isGenderMaleRadioSelected());
+        verifyEquals(personalDetailsPage.getToDriverLicenseValue(), driverLicense);
+        verifyEquals( personalDetailsPage.getToLicenseExpiryDateValue(), licenseExpiryDate);
+        verifyEquals(personalDetailsPage.getToNationalitySelectedItem(), nationality);
+        verifyEquals(personalDetailsPage.getToMaritalStatusSelectedItem(), maritalStatus);
+        verifyEquals(personalDetailsPage.getToDateOfBirthValue(), dateOfBirth);
+        verifyTrue(personalDetailsPage.isGenderMaleRadioSelected());
     }
 
 //    @Test
@@ -170,5 +160,19 @@ public class PIM_01_Employee extends BaseTest {
     public void afterClass() {
         closeBrowserDriver();
     }
+
+    private WebDriver driver;
+    private LoginPO loginPage;
+    private DashboardPO dashboardPage;
+    private AddEmployeePO addEmployeePage;
+    private EmployeeListPO employeeListPage;
+    private EmployeePersonalDetailsPO personalDetailsPage;
+    private EmergencyContactsPO emergencyContactsPage;
+    private ContactDetailsPO contactDetailsPage;
+    private EmployeeInfo employeeInfo;
+    private String usernsame, password;
+    private String firstName, middleName, lastName, employeeId;
+    private String editFirstName, editMiddleName, editLastName, driverLicense, licenseExpiryDate, nationality, maritalStatus, dateOfBirth;
+    private String avatarImageName;
 
 }
