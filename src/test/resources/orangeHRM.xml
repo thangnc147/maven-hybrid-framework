@@ -3,8 +3,8 @@
 <suite name="OrangeHRM Automcation Test">
 
     <listeners>
-        <listener class-name="commons.MethodListener"></listener>
-        <listener class-name="reportConfigs.AllureListener"></listener>
+<!--        <listener class-name="commons.MethodListener"></listener>-->
+<!--        <listener class-name="reportConfigs.AllureListener"></listener>-->
     </listeners>
 
     <parameter name="userUrl" value="http://localhost:90/orangehrm5/"/>
